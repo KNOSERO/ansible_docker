@@ -8,6 +8,11 @@
       - ca-certificates
       - curl
     state: present
+    update_cache: yes
+  register: docker_install
+  retries: 5
+  delay: 30
+  until: docker_install is success
 
 - name: Create directory for Docker keyrings
   ansible.builtin.file:
