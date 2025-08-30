@@ -41,6 +41,11 @@
       - docker-buildx-plugin
       - docker-compose-plugin
     state: present
+    update_cache: yes
+  register: docker_install
+  retries: 5
+  delay: 30
+  until: docker_install is success
 
 - name: Ensure Docker service is started and enabled
   ansible.builtin.service:
